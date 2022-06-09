@@ -9,7 +9,7 @@ async function run() {
 
         const owner = payload.pull_request.head.repo.owner.login;
         const repo = payload.pull_request.head.repo.name;
-        const ref = payload.pull_request.head.ref;
+        const ref = payload.pull_request.head.sha;
 
         core.info(`inputs: ${owner} ${repo} ${ref}`)
 
