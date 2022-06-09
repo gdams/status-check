@@ -3,11 +3,10 @@ const github = require('@actions/github');
 
 try {
   // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = github.context.payload
-  const myToken = core.getInput('github_token');
-  const octokit = github.getOctokit(myToken)
+  const token = core.getInput('github_token');
+  const octokit = github.getOctokit(token)
 
-  getStatusChecks(payload, octokit)
+  getStatusChecks(github.context.payload, octokit)
 
 } catch (error) {
   core.setFailed(error.message);
@@ -18,7 +17,7 @@ async function getStatusChecks(payload, octokit) {
     const repo = payload.pull_request.head.repo.name;
     const ref = payload.pull_request.head.ref;
 
-    core.setOutput(owner, repo, ref)
+    core.debug(owner, repo, ref)
 
     const { checks } = await octokit.rest.checks.listForRef({
         owner: owner,
