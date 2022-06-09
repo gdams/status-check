@@ -14,13 +14,17 @@ try {
 }
 
 async function getStatusChecks(payload, octokit) {
-    const { checks } = await octokit.rest.checks.listForRef({
-        owner: payload.pull_request.head.repo.owner.login,
-        repo: payload.pull_request.head.repo.name,
-        ref: payload.pull_request.head.sha,
-    });
+    const owner = payload.pull_request.head.repo.owner.login;
+    const repo = payload.pull_request.head.repo.name;
+    const ref = payload.pull_request.head.ref;
 
-    core.setOutput('status_checks', JSON.stringify(checks));
+    core.setOutput(owner, repo, ref)
+
+    const { checks } = await octokit.rest.checks.listForRef({
+        owner: owner,
+        repo: repo,
+        ref: ref,
+    });
   
     // if (checks.check_runs.length !== 0) {
     //   console.log(`Detected ${checks.total_count} checks`);
