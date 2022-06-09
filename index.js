@@ -11,7 +11,7 @@ async function run() {
         const repo = payload.pull_request.head.repo.name;
         const ref = payload.pull_request.head.ref;
 
-        core.setOutput(`inputs: ${owner} ${repo} ${ref}`)
+        core.info(`inputs: ${owner} ${repo} ${ref}`)
 
         const checks = await octokit.rest.checks.listForRef({
             owner: owner,
@@ -19,7 +19,7 @@ async function run() {
             ref: ref,
         });
 
-        core.setOutput(JSON.stringify(checks))
+        core.info(JSON.stringify(checks))
     } catch (error) {
         core.setFailed(error.message);
     }
