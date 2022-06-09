@@ -20,6 +20,8 @@ async function getStatusChecks(payload, octokit) {
         ref: payload.pull_request.head.sha,
     });
   
+    core.setOutput('status_checks', JSON.stringify(checks));
+  
     if (checks.check_runs.length !== 0) {
       console.log(`Detected ${checks.total_count} checks`);
   
