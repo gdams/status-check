@@ -15,8 +15,8 @@ try {
 
 async function getStatusChecks(payload, octokit) {
     const { checks } = await octokit.rest.checks.listForRef({
-        owner: payload.owner,
-        repo: payload.repo,
+        owner: payload.pull_request.head.repo.owner.login,
+        repo: payload.pull_request.head.repo.name,
         ref: payload.pull_request.head.sha,
     });
   
