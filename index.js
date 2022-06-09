@@ -19,57 +19,57 @@ async function getStatusChecks(payload, octokit) {
         repo: payload.pull_request.head.repo.name,
         ref: payload.pull_request.head.sha,
     });
-  
+
     core.setOutput('status_checks', JSON.stringify(checks));
   
-    if (checks.check_runs.length !== 0) {
-      console.log(`Detected ${checks.total_count} checks`);
+    // if (checks.check_runs.length !== 0) {
+    //   console.log(`Detected ${checks.total_count} checks`);
   
-      for (const check of checks.check_runs) {
-        if (check.app.slug !== 'adoptium-status') {
-          console.log(`Creating status check for ${check.name}`);
+    //   for (const check of checks.check_runs) {
+    //     if (check.app.slug !== 'adoptium-status') {
+    //       console.log(`Creating status check for ${check.name}`);
   
-          let checkBuilder = {
-            name: check.name,
-            status: check.status,
-            head_sha: sha,
-            started_at: check.started_at
-          }
+    //       let checkBuilder = {
+    //         name: check.name,
+    //         status: check.status,
+    //         head_sha: sha,
+    //         started_at: check.started_at
+    //       }
   
-          if (check.status === 'completed') {
-            checkBuilder.completed_at = check.completed_at;
-          }
+    //       if (check.status === 'completed') {
+    //         checkBuilder.completed_at = check.completed_at;
+    //       }
   
-          if (check.external_id) {
-            checkBuilder.external_id = check.external_id;
-          }
+    //       if (check.external_id) {
+    //         checkBuilder.external_id = check.external_id;
+    //       }
   
-          if (check.conclusion) {
-            checkBuilder.conclusion = check.conclusion;
-          }
+    //       if (check.conclusion) {
+    //         checkBuilder.conclusion = check.conclusion;
+    //       }
   
-          if (check.output && check.output.title) {
-            let output = {}
-            if (check.output.title) {
-              output.title = check.output.title;
-            }
+    //       if (check.output && check.output.title) {
+    //         let output = {}
+    //         if (check.output.title) {
+    //           output.title = check.output.title;
+    //         }
   
-            if (check.output.summary) {
-              output.summary = check.output.summary;
-            }
-            checkBuilder.output = output;
-          }
+    //         if (check.output.summary) {
+    //           output.summary = check.output.summary;
+    //         }
+    //         checkBuilder.output = output;
+    //       }
   
-          if (check.details_url) {
-            checkBuilder.details_url = check.details_url;
-          }
+    //       if (check.details_url) {
+    //         checkBuilder.details_url = check.details_url;
+    //       }
 
-          await octokit.rest.checks.create({
-            owner,
-            repo,
-            checkBuilder
-          });
-        }
-      }
-    }
+    //       await octokit.rest.checks.create({
+    //         owner,
+    //         repo,
+    //         checkBuilder
+    //       });
+    //     }
+    //   }
+    // }
 }
