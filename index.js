@@ -6,6 +6,7 @@ async function run() {
     // Get the JSON webhook payload for the event that triggered the workflow
     const token = core.getInput('github_token');
     const octokit = github.getOctokit(token);
+    const payload = github.context.payload
 
     const owner = payload.pull_request.head.repo.owner.login;
     const repo = payload.pull_request.head.repo.name;
