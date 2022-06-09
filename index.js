@@ -30,7 +30,7 @@ async function run() {
                     owner: owner,
                     name: check.name,
                     status: check.status,
-                    head_sha: sha,
+                    head_sha: ref,
                     started_at: check.started_at
                 }
             
