@@ -11,7 +11,7 @@ async function run() {
         const repo = payload.pull_request.head.repo.name;
         const ref = payload.pull_request.head.ref;
 
-        core.setOutput(owner, repo, ref)
+        core.setOutput('inputs:', owner, repo, ref)
 
         const checks = await octokit.rest.checks.listForRef({
             owner: owner,
