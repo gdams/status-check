@@ -1,8 +1,6 @@
 name: "Fake CI test"
 on:
   push:
-    branches: [ main]
-  
 
 jobs:
   fake-ci:
