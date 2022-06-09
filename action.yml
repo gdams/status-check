@@ -1,0 +1,9 @@
+name: 'Status Sync'
+description: 'Designed to save actions minutes by running CI tests using the contributors minutes.'
+inputs:
+  github_token:
+    description: A GitHub token.
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
