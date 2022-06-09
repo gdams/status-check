@@ -7,7 +7,7 @@ try {
   const myToken = core.getInput('github_token');
   const octokit = github.getOctokit(myToken)
 
-  console.log(`The event payload: ${payload}`);
+  core.setOutput(`The event payload: ${payload}`);
   getStatusChecks(payload, octokit)
 
 } catch (error) {
