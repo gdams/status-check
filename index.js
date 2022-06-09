@@ -22,8 +22,6 @@ async function run() {
 
     core.debug(checks)
 
-    getStatusChecks(github.context.payload, octokit);
-
     } catch (error) {
         core.setFailed(error.message);
     }
